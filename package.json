@@ -1,6 +1,6 @@
 {
   "name": "fantasy_sports",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "aws-sdk": "^2.819.0",
     "axios": "^0.21.1",
