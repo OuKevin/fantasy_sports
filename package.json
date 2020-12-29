@@ -3,6 +3,7 @@
   "version": "1.0.16",
   "dependencies": {
     "aws-sdk": "^2.784.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
@@ -13,7 +14,9 @@
     "babel-loader": "^8.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0"
   },
   "scripts": {
     "build": "(mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
