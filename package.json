@@ -21,6 +21,6 @@
   "scripts": {
     "build": "(mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
     "lint": "eslint \"@(src)/**/*.js?(x)\" --fix;",
-    "publish": "node '../../publish.js'"
+    "publish": "node publish.js"
   }
 }
