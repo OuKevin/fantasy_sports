@@ -1,0 +1,27 @@
+# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  build:
+    commands:
+      - git config --global user.name "mechanical-user"
+      - git config --global user.email ""
+      - git clone https://$GIT_TOKEN@github.com/OuKevin/fantasy_sports.git
+      - git remote rm origin
+      - git remote add origin https://$GIT_TOKEN@github.com/OuKevin/fantasy_sports.git
+      - git fetch --all
+      - git checkout main
+      - git status
+      
+      - npm ci
+      - npm run build
+      - npm run publish
+
+  post_build:
+    commands:
+      - npm version patch -m 'code build version bump'
+      - git push --set-upstream origin main
+      - git push origin refs/tags/*:refs/tags/*
