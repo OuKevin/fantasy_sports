@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "dependencies": {
     "aws-sdk": "^2.784.0",
     "axios": "^0.21.1",
