@@ -12,6 +12,6 @@ module.exports = {
     'no-console': 0,
     'import/no-extraneous-dependencies': ['error', { bundledDependencies: false }],
     semi: [2, 'always'],
-    linebreak-style: 0
+    'linebreak-style': 0,
   },
 };
