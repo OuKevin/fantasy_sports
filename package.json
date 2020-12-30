@@ -1,29 +1,30 @@
 {
   "name": "fantasy_sports",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "dependencies": {
-    "aws-sdk": "^2.784.0",
+    "aws-sdk": "^2.819.0",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/runtime": "^7.12.1",
-    "babel-loader": "^8.1.0",
-    "eslint": "^7.12.1",
-    "eslint-config-airbnb-base": "^14.2.0",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/runtime": "^7.12.5",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   },
   "scripts": {
-    "build": "(mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
+    "build": "NODE_ENV=production && (mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
     "dev": "babel-node dev/index.js",
     "lint": "eslint \"@(dev|src)/**/*.js?(x)\" --fix;",
-    "publish": "node publish.js"
+    "publish": "node publish.js",
+    "publish:local": "NODE_ENV=development node publish.js"
   }
 }
