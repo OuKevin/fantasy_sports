@@ -1,4 +1,5 @@
 import getTeamMappings from './getTeamMappings';
+import getMatchupHistory from './getMatchupHistory';
 
 export default async (event, context, callback) => {
   const YEAR = 2021;
@@ -6,9 +7,11 @@ export default async (event, context, callback) => {
 
   try {
     const memberMappings = await getTeamMappings(LEAGUE_ID, YEAR);
+    const matchupHistory = await getMatchupHistory(LEAGUE_ID, YEAR);
+
     const response = {
       statusCode: 200,
-      body: memberMappings,
+      body: matchupHistory,
     };
 
     callback(null, response);
