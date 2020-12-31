@@ -7,7 +7,10 @@ export default async (leagueId, year) => {
   const { data: { teams } } = await axios.get(ENDPOINT);
 
   const ownersById = teams.reduce((prev, { id, location, nickname }) => {
-    prev[id] = `${location} ${nickname}`;
+    prev[id] = {
+      name: `${location} ${nickname}`,
+      payout: 0,
+    };
 
     return prev;
   }, {});

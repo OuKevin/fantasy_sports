@@ -5,14 +5,14 @@ export default (schedule) => {
   }) => ({
     away: {
       teamId: away.teamId,
-      points: away.cumulativeScore.scoreByStat[0],
+      points: away.cumulativeScore.scoreByStat[0].result,
     },
     home: {
       teamId: home.teamId,
-      points: home.cumulativeScore.scoreByStat[0],
+      points: home.cumulativeScore.scoreByStat[0].result,
     },
     matchupPeriodId,
-    winner,
+    winner: winner.toLowerCase(),
   }));
 
   return mappedSchedule;
