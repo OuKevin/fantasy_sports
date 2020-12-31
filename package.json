@@ -1,6 +1,14 @@
 {
   "name": "fantasy_sports",
   "version": "0.0.6",
+  "scripts": {
+    "build": "NODE_ENV=production && (mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
+    "dev": "babel-node dev/index.js",
+    "lint": "eslint \"@(dev|src)/**/*.js?(x)\" --fix;",
+    "publish": "node publish.js",
+    "publish:local": "NODE_ENV=development node publish.js",
+    "test": "jest"
+  },
   "dependencies": {
     "aws-sdk": "^2.819.0",
     "axios": "^0.21.1",
@@ -19,14 +27,8 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
+    "jest": "^26.6.3",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
-  },
-  "scripts": {
-    "build": "NODE_ENV=production && (mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
-    "dev": "babel-node dev/index.js",
-    "lint": "eslint \"@(dev|src)/**/*.js?(x)\" --fix;",
-    "publish": "node publish.js",
-    "publish:local": "NODE_ENV=development node publish.js"
   }
 }

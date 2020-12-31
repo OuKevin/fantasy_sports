@@ -15,8 +15,10 @@ export default (memberMappings, matchupHistory) => (
         prev[away.teamId].payout += WEEKLY_WIN_PAYOUT;
       } else {
         prev[home.teamId].payout += WEEKLY_TIE_PAYOUT;
-        prev[away.teamId].payout += WEEKLY_WIN_PAYOUT;
+        prev[away.teamId].payout += WEEKLY_TIE_PAYOUT;
       }
+
+      return prev;
     }
 
     const winningId = cur[winner].teamId;
