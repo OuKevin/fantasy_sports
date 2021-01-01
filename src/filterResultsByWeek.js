@@ -1,3 +1,3 @@
-export default (WEEK, matchupHistory) => (
-  matchupHistory.filter(({ matchupPeriodId }) => matchupPeriodId === WEEK)
+export default (currentMatchupPeriod, matchupHistory) => (
+  matchupHistory.filter(({ matchupPeriodId }) => matchupPeriodId === currentMatchupPeriod)
 );
