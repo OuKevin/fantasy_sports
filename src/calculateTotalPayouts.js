@@ -9,7 +9,7 @@ export default (memberMappings, matchupHistory) => (
   matchupHistory.reduce((prev, cur) => {
     const { winner, home, away } = cur;
 
-    // Handle Ties
+    // Handle Ties, still need to validate & improve this path.
     if (winner !== 'home' && winner !== 'away') {
       if (home.points === 'WIN') {
         prev[home.teamId].payout += WEEKLY_WIN_PAYOUT;

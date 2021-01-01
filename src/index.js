@@ -5,6 +5,7 @@ import getMatchupHistory from './getMatchupHistory';
 import postTotalResults from './postTotalResults';
 
 export default async () => {
+  // TODO: See if there is a way to programatically figure out the year
   const { LEAGUE_ID, YEAR } = process.env;
 
   try {
