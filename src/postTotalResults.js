@@ -1,7 +1,7 @@
 import axios from 'axios';
 import map from 'lodash/map';
 
-export default async (results) => {
+export default async (results, headerText) => {
   const { SLACK_WEBHOOK } = process.env;
   const formattedResults = map(results, ({ name, payout }) => ({ name, payout }));
   const sortedResults = formattedResults.sort((a, b) => {
@@ -13,7 +13,7 @@ export default async (results) => {
     return b.payout - a.payout;
   });
   const message = sortedResults.map((({ name, payout }) => `${name}: $${payout}`));
-  const messageHeader = '--------------- \n *Total Payouts* \n ---------------';
+  const messageHeader = `--------------- \n *${headerText}* \n ---------------`;
   const formattedMessage = `${messageHeader} \n ${message.join(' \n ')}`;
 
   await axios.put(SLACK_WEBHOOK, { text: formattedMessage });
