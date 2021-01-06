@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+import { FANTASY_V3_BASE_ENDPOINT } from './constants';
 
 export default async (leagueId, year) => {
-  const ENDPOINT = `http://fantasy.espn.com/apis/v3/games/fba/seasons/${year}/segments/0/leagues/${leagueId}`;
+  const ENDPOINT = `${FANTASY_V3_BASE_ENDPOINT}/seasons/${year}/segments/0/leagues/${leagueId}`;
   const { data: { status, teams } } = await axios.get(ENDPOINT);
 
   const ownersById = teams.reduce((prev, { id, location, nickname }) => {
@@ -16,6 +17,7 @@ export default async (leagueId, year) => {
 
   return {
     currentMatchupPeriod: status.currentMatchupPeriod,
+    isActive: status.isActive,
     memberMappings: ownersById,
   };
 };
