@@ -1,9 +1,11 @@
 import calculateTotalPayouts from './calculateTotalPayouts';
-import getLeagueInfo from './getLeagueInfo';
-import getFantasyYear from './getFantasyYear';
-import getMatchupHistory from './getMatchupHistory';
+import getLeagueInfo from './network/getLeagueInfo';
+import getFantasyYear from './network/getFantasyYear';
+import getMatchupHistory from './network/getMatchupHistory';
 import filterResultsByWeek from './filterResultsByWeek';
 import postTotalResults from './postTotalResults';
+import hasHandledFinalWeek from './hasHandledFinalWeek';
+import handleFinalWeek from './handleFinalWeek';
 
 export default async () => {
   const { LEAGUE_ID } = process.env;
@@ -12,9 +14,11 @@ export default async () => {
     const year = await getFantasyYear();
     const { currentMatchupPeriod, isActive, memberMappings } = await getLeagueInfo(LEAGUE_ID, year);
     const previouslyCompletedPeriod = currentMatchupPeriod - 1;
+    const seasonIsCompleted = !isActive && await hasHandledFinalWeek(year);
+    const isFinalWeek = false;
 
-    // TODO: Validate if this is correct way to end the season
-    if (!isActive) {
+    // TODO: Find regular season termination condition
+    if (seasonIsCompleted) {
       return;
     }
 
@@ -25,6 +29,10 @@ export default async () => {
 
     await postTotalResults(payoutForSingleWeek, `WEEK ${previouslyCompletedPeriod} PAYOUT`);
     await postTotalResults(totalPayoutsByTeam, 'TOTAL PAYOUT');
+
+    if (isFinalWeek) {
+      await handleFinalWeek(year);
+    }
   } catch (error) {
     console.log(error);
   }
