@@ -12,9 +12,9 @@ export default (memberMappings, matchupHistory, TIEBREAKER_CATEGORY, WEEKLY_WIN_
     const parsedPayout = parseFloat(WEEKLY_WIN_PAYOUT, 10);
 
     if (winner === 'tie') {
-      if (home[TIEBREAKER_CATEGORY] === 'WIN') {
+      if (home.tiebreakerCat === 'WIN') {
         prev[home.teamId].payout += parsedPayout;
-      } else if (away[TIEBREAKER_CATEGORY] === 'WIN') {
+      } else if (away.tiebreakerCat === 'WIN') {
         prev[away.teamId].payout += parsedPayout;
       } else {
         prev[home.teamId].payout += parsedPayout / 2;

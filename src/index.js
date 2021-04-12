@@ -27,7 +27,12 @@ export default async () => {
       return;
     }
 
-    const matchupHistory = await getMatchupHistory(LEAGUE_ID, LEAGUE_TYPE, year);
+    const matchupHistory = await getMatchupHistory(
+      LEAGUE_ID,
+      LEAGUE_TYPE,
+      TIEBREAKER_CATEGORY,
+      year,
+    );
     const matchupForSingleWeek = filterResultsByWeek(previouslyCompletedPeriod, matchupHistory);
     const payoutForSingleWeek = calculateTotalPayouts(
       memberMappings,
