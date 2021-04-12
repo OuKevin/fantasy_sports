@@ -6,7 +6,12 @@ import filterResultsByWeek from './filterResultsByWeek';
 import postTotalResults from './postTotalResults';
 
 export default async () => {
-  const { LEAGUE_ID, LEAGUE_TYPE, TIEBREAKER_CATEGORY } = process.env;
+  const {
+    LEAGUE_ID,
+    LEAGUE_TYPE,
+    TIEBREAKER_CATEGORY,
+    WEEKLY_WIN_PAYOUT,
+  } = process.env;
 
   try {
     const year = await getFantasyYear(LEAGUE_TYPE);
@@ -28,11 +33,13 @@ export default async () => {
       memberMappings,
       matchupForSingleWeek,
       TIEBREAKER_CATEGORY,
+      WEEKLY_WIN_PAYOUT,
     );
     const totalPayoutsByTeam = calculateTotalPayouts(
       memberMappings,
       matchupHistory,
       TIEBREAKER_CATEGORY,
+      WEEKLY_WIN_PAYOUT,
     );
 
     await postTotalResults(payoutForSingleWeek, `WEEK ${previouslyCompletedPeriod} PAYOUT`);

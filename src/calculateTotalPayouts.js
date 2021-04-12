@@ -1,24 +1,24 @@
 /* eslint-disable no-param-reassign */
 import cloneDeep from 'lodash/cloneDeep';
-import { WEEKLY_WIN_PAYOUT } from './constants';
 
 /*
  * Weekly winners receive determined payout amount
  * If there is a tie, TIEBREAKER_CATEGORY is compared to break it
  * If TIEBREAKER_CATEGORY ends up tied, winners split the payout
 */
-export default (memberMappings, matchupHistory, TIEBREAKER_CATEGORY) => (
+export default (memberMappings, matchupHistory, TIEBREAKER_CATEGORY, WEEKLY_WIN_PAYOUT) => (
   matchupHistory.reduce((prev, cur) => {
     const { winner, home, away } = cur;
+    const parsedPayout = parseFloat(WEEKLY_WIN_PAYOUT, 10);
 
     if (winner === 'tie') {
       if (home[TIEBREAKER_CATEGORY] === 'WIN') {
-        prev[home.teamId].payout += WEEKLY_WIN_PAYOUT;
+        prev[home.teamId].payout += parsedPayout;
       } else if (away[TIEBREAKER_CATEGORY] === 'WIN') {
-        prev[away.teamId].payout += WEEKLY_WIN_PAYOUT;
+        prev[away.teamId].payout += parsedPayout;
       } else {
-        prev[home.teamId].payout += WEEKLY_WIN_PAYOUT / 2;
-        prev[away.teamId].payout += WEEKLY_WIN_PAYOUT / 2;
+        prev[home.teamId].payout += parsedPayout / 2;
+        prev[away.teamId].payout += parsedPayout / 2;
       }
 
       return prev;
@@ -26,7 +26,7 @@ export default (memberMappings, matchupHistory, TIEBREAKER_CATEGORY) => (
 
     const winningId = cur[winner].teamId;
 
-    prev[winningId].payout += WEEKLY_WIN_PAYOUT;
+    prev[winningId].payout += parsedPayout;
 
     return prev;
   }, cloneDeep(memberMappings))
