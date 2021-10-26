@@ -37,13 +37,11 @@ export default async () => {
     const payoutForSingleWeek = calculateTotalPayouts(
       memberMappings,
       matchupForSingleWeek,
-      TIEBREAKER_CATEGORY,
       WEEKLY_WIN_PAYOUT,
     );
     const totalPayoutsByTeam = calculateTotalPayouts(
       memberMappings,
       matchupHistory,
-      TIEBREAKER_CATEGORY,
       WEEKLY_WIN_PAYOUT,
     );
 
