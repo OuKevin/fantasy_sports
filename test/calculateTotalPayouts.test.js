@@ -1,14 +1,16 @@
 import calculateTotalPayouts from '../src/calculateTotalPayouts';
 
 describe('calculateTotalPayouts', () => {
+  const PAYOUT = 5;
+
   it('calculates total for a win', () => {
     const memberMappings = {
       1: { name: 'testUser1', payout: 0 },
       2: { name: 'testUser2', payout: 0 },
     };
     const matchHistory = [{
-      away: { teamId: 1, points: 'WIN' },
-      home: { teamId: 2, points: 'LOSS' },
+      away: { teamId: 1, tiebreakerCat: 'WIN' },
+      home: { teamId: 2, tiebreakerCat: 'LOSS' },
       matchupPeriodId: 1,
       winner: 'away',
     }];
@@ -16,7 +18,7 @@ describe('calculateTotalPayouts', () => {
       1: { name: 'testUser1', payout: 5 },
       2: { name: 'testUser2', payout: 0 },
     };
-    const actual = calculateTotalPayouts(memberMappings, matchHistory);
+    const actual = calculateTotalPayouts(memberMappings, matchHistory, PAYOUT);
 
     expect(actual).toEqual(expected);
   });
@@ -26,18 +28,18 @@ describe('calculateTotalPayouts', () => {
       2: { name: 'testUser2', payout: 0 },
     };
     const matchHistory = [{
-      away: { teamId: 1, points: 'WIN' },
-      home: { teamId: 2, points: 'LOSS' },
+      away: { teamId: 1, tiebreakerCat: 'WIN' },
+      home: { teamId: 2, tiebreakerCat: 'LOSS' },
       matchupPeriodId: 1,
       winner: 'away',
     }, {
-      away: { teamId: 1, points: 'WIN' },
-      home: { teamId: 2, points: 'LOSS' },
+      away: { teamId: 1, tiebreakerCat: 'WIN' },
+      home: { teamId: 2, tiebreakerCat: 'LOSS' },
       matchupPeriodId: 2,
       winner: 'away',
     }, {
-      away: { teamId: 1, points: 'LOSS' },
-      home: { teamId: 2, points: 'WIN' },
+      away: { teamId: 1, tiebreakerCat: 'LOSS' },
+      home: { teamId: 2, tiebreakerCat: 'WIN' },
       matchupPeriodId: 1,
       winner: 'home',
     }];
@@ -45,18 +47,18 @@ describe('calculateTotalPayouts', () => {
       1: { name: 'testUser1', payout: 10 },
       2: { name: 'testUser2', payout: 5 },
     };
-    const actual = calculateTotalPayouts(memberMappings, matchHistory);
+    const actual = calculateTotalPayouts(memberMappings, matchHistory, PAYOUT);
 
     expect(actual).toEqual(expected);
   });
-  it('calculates a win through points', () => {
+  it('calculates a win through tiebreakerCat', () => {
     const memberMappings = {
       1: { name: 'testUser1', payout: 0 },
       2: { name: 'testUser2', payout: 0 },
     };
     const matchHistory = [{
-      away: { teamId: 1, points: 'LOSS' },
-      home: { teamId: 2, points: 'WIN' },
+      away: { teamId: 1, tiebreakerCat: 'LOSS' },
+      home: { teamId: 2, tiebreakerCat: 'WIN' },
       matchupPeriodId: 1,
       winner: 'tie',
     }];
@@ -64,7 +66,7 @@ describe('calculateTotalPayouts', () => {
       1: { name: 'testUser1', payout: 0 },
       2: { name: 'testUser2', payout: 5 },
     };
-    const actual = calculateTotalPayouts(memberMappings, matchHistory);
+    const actual = calculateTotalPayouts(memberMappings, matchHistory, PAYOUT);
 
     expect(actual).toEqual(expected);
   });
@@ -74,8 +76,8 @@ describe('calculateTotalPayouts', () => {
       2: { name: 'testUser2', payout: 0 },
     };
     const matchHistory = [{
-      away: { teamId: 1, points: 'tie' },
-      home: { teamId: 2, points: 'tie' },
+      away: { teamId: 1, tiebreakerCat: 'tie' },
+      home: { teamId: 2, tiebreakerCat: 'tie' },
       matchupPeriodId: 1,
       winner: 'tie',
     }];
@@ -83,7 +85,7 @@ describe('calculateTotalPayouts', () => {
       1: { name: 'testUser1', payout: 2.5 },
       2: { name: 'testUser2', payout: 2.5 },
     };
-    const actual = calculateTotalPayouts(memberMappings, matchHistory);
+    const actual = calculateTotalPayouts(memberMappings, matchHistory, PAYOUT);
 
     expect(actual).toEqual(expected);
   });

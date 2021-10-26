@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
  * If there is a tie, TIEBREAKER_CATEGORY is compared to break it
  * If TIEBREAKER_CATEGORY ends up tied, winners split the payout
 */
-export default (memberMappings, matchupHistory, TIEBREAKER_CATEGORY, WEEKLY_WIN_PAYOUT) => (
+export default (memberMappings, matchupHistory, WEEKLY_WIN_PAYOUT) => (
   matchupHistory.reduce((prev, cur) => {
     const { winner, home, away } = cur;
     const parsedPayout = parseFloat(WEEKLY_WIN_PAYOUT, 10);
