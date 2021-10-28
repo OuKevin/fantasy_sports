@@ -10,6 +10,8 @@ export default async (leagueId, leagueType, year) => {
     prev[id] = {
       name: `${location} ${nickname}`,
       payout: 0,
+      previousGameResult: 'INITIAL',
+      streak: 0,
     };
 
     return prev;
