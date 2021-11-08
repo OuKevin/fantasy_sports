@@ -2,7 +2,6 @@ import calculateTotalPayouts from './calculateTotalPayouts';
 import getLeagueInfo from './getLeagueInfo';
 import getFantasyYear from './getFantasyYear';
 import getMatchupHistory from './getMatchupHistory';
-import filterResultsByWeek from './filterResultsByWeek';
 import postTotalResults from './postTotalResults';
 
 export default async () => {
@@ -33,20 +32,13 @@ export default async () => {
       TIEBREAKER_CATEGORY,
       year,
     );
-    const matchupForSingleWeek = filterResultsByWeek(previouslyCompletedPeriod, matchupHistory);
-    const payoutForSingleWeek = calculateTotalPayouts(
-      memberMappings,
-      matchupForSingleWeek,
-      WEEKLY_WIN_PAYOUT,
-    );
     const totalPayoutsByTeam = calculateTotalPayouts(
       memberMappings,
       matchupHistory,
       WEEKLY_WIN_PAYOUT,
     );
 
-    await postTotalResults(payoutForSingleWeek, `WEEK ${previouslyCompletedPeriod} PAYOUT`);
-    await postTotalResults(totalPayoutsByTeam, 'TOTAL PAYOUT');
+    await postTotalResults(totalPayoutsByTeam, `WEEK ${previouslyCompletedPeriod} TOTAL PAYOUT `);
   } catch (error) {
     console.log(error);
   }
