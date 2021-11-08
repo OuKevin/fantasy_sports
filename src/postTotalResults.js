@@ -1,8 +1,24 @@
 import axios from 'axios';
 import map from 'lodash/map';
+import { LOSE, STREAK_THRESHOLD, WIN } from './constants';
+
+const BORDER_TEXT = '--------------------------------';
+const renderDelta = (previousGameResult) => {
+  if (previousGameResult === LOSE) {
+    return '';
+  }
+
+  return ':moneybag:';
+};
+
+const renderStreak = (previousGameResult, streak) => {
+  const streakImage = previousGameResult === WIN ? ':fire:' : ':snowflake:';
+
+  return streak >= STREAK_THRESHOLD ? streakImage : '';
+};
 
 export const generateMessage = (results, headerText) => {
-  const formattedResults = map(results, ({ name, payout }) => ({ name, payout }));
+  const formattedResults = map(results, (result) => result);
 
   // sorts by payout then by name
   const sortedResults = formattedResults.sort((a, b) => {
@@ -12,9 +28,11 @@ export const generateMessage = (results, headerText) => {
 
     return b.payout - a.payout;
   });
-  const message = sortedResults.map((({ name, payout }) => `${name}: $${payout}`));
-  const messageHeader = `-------------------- \n *${headerText}* \n --------------------`;
-  const formattedMessage = `${messageHeader} \n ${message.join(' \n ')}`;
+  const message = sortedResults.map((({
+    name, payout, previousGameResult, streak,
+  }) => `${name}: $${payout} ${renderDelta(previousGameResult)} ${renderStreak(previousGameResult, streak)}`));
+  const messageHeader = `${BORDER_TEXT} \n *${headerText}* \n ${BORDER_TEXT}`;
+  const formattedMessage = `${messageHeader} \n ${message.join(' \n ')} \n \n :moneybag:: Made $$$ \n :fire:: 3+ Win Streak \n :snowflake:: 3+ Lose Streak`;
 
   return formattedMessage;
 };
