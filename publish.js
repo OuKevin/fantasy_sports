@@ -19,7 +19,7 @@ const createNewLambda = async (lambda, lambdaName, zipPath) => {
       FunctionName: lambdaName,
       Handler: 'index.default',
       Role: 'arn:aws:iam::764074376504:role/lambda-full-access',
-      Runtime: 'nodejs12.x',
+      Runtime: 'nodejs14.x',
       Timeout: 15,
       Tags: {
         project: 'fantasy_sports',
