@@ -32,6 +32,7 @@ export default async () => {
       TIEBREAKER_CATEGORY,
       year,
     );
+
     const totalPayoutsByTeam = calculateTotalPayouts(
       memberMappings,
       matchupHistory,

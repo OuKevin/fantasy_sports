@@ -6,9 +6,9 @@ export default async (leagueId, leagueType, year) => {
   const ENDPOINT = `${FANTASY_V3_BASE_ENDPOINT}/${leagueType}/seasons/${year}/segments/0/leagues/${leagueId}`;
   const { data: { status, teams } } = await axios.get(ENDPOINT);
 
-  const ownersById = teams.reduce((prev, { id, location, nickname }) => {
+  const ownersById = teams.reduce((prev, { id, abbrev }) => {
     prev[id] = {
-      name: `${location} ${nickname}`,
+      name: abbrev,
       payout: 0,
       previousGameResult: 'INITIAL',
       streak: 0,
