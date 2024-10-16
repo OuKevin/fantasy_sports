@@ -4,9 +4,11 @@ import { FANTASY_V3_BASE_ENDPOINT } from './constants';
 
 export default async (leagueId, leagueType, year) => {
   const ENDPOINT = `${FANTASY_V3_BASE_ENDPOINT}/${leagueType}/seasons/${year}/segments/0/leagues/${leagueId}`;
-  const { data: { status, teams } } = await axios.get(ENDPOINT);
+  const { data } = await axios.get(ENDPOINT);
 
-  const ownersById = teams.reduce((prev, { id, abbrev }) => {
+  console.log(ENDPOINT)
+
+  const ownersById = data.reduce((prev, { id, abbrev }) => {
     prev[id] = {
       name: abbrev,
       payout: 0,
