@@ -1,4 +1,4 @@
-export const FANTASY_V3_BASE_ENDPOINT = 'https://fantasy.espn.com/apis/v3/games';
+export const FANTASY_V3_BASE_ENDPOINT = 'https://lm-api-reads.fantasy.espn.com/apis/v3/games';
 export const TIE = 'TIE';
 export const LOSE = 'LOSE';
 export const WIN = 'WIN';
