@@ -1,6 +1,6 @@
 {
   "name": "fantasy_sports",
-  "version": "0.0.263",
+  "version": "0.0.264",
   "scripts": {
     "build": "NODE_ENV=production && (mkdir dist || rm dist/* || rm -rd dist ) && webpack && cd dist && zip -qr archive.zip index.js",
     "dev": "babel-node dev/index.js",
